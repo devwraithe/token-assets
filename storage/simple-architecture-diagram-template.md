@@ -89,3 +89,38 @@
 │   (Datadog)    │ • Security monitoring
 └────────────────┘
 ```
+```
+Layer separation
+┌──────────────────┐
+│  Presentation    │  ← User-facing
+├──────────────────┤
+│  Application     │  ← Business logic
+├──────────────────┤
+│  Blockchain      │  ← On-chain state
+├──────────────────┤
+│  Infrastructure  │  ← Monitoring/Storage
+└──────────────────┘
+
+Program to Program interaction
+┌─────────────┐
+│ Vault       │ Cross-Program
+│ Program     │ Invocation (CPI)
+└──────┬──────┘        │
+       │ ◄─────────────┘
+       ▼
+┌─────────────┐
+│ Token       │
+│ Program     │
+└─────────────┘
+
+State management (pda pattern)
+Vault Program Address
+       │
+       ├─► Vault State PDA (seeds: ["vault", authority])
+       │      • Total deposits
+       │      • Share calculation
+       │
+       └─► User Deposit PDA (seeds: ["deposit", user, vault])
+              • User shares
+              • Last interaction
+```
